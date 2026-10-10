@@ -37,6 +37,11 @@ def listar_audios(carpeta):
 # ------------------------------------------------- caracterización básica
 def caracterizar(x, fs):
     """Parámetros básicos de la señal en el dominio del tiempo."""
+    x = np.asarray(x)
+    if x.size == 0:
+        raise ValueError("La señal está vacía; no se puede caracterizar.")
+    if fs <= 0:
+        raise ValueError("La frecuencia de muestreo debe ser positiva.")
     return {
         "fs_Hz": fs,
         "Ts_s": 1 / fs,
@@ -51,8 +56,14 @@ def caracterizar(x, fs):
 
 def normalizar(x):
     """Quita la media (componente DC) y normaliza al pico a 1."""
+    x = np.asarray(x, dtype=np.float64)
+    if x.size == 0:
+        raise ValueError("La señal está vacía; no se puede normalizar.")
     x = x - x.mean()
-    return x / np.max(np.abs(x))
+    pico = np.max(np.abs(x))
+    if pico == 0:
+        return x
+    return x / pico
 
 
 # ---------------------------------------------------------- segmentación
