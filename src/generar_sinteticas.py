@@ -10,6 +10,7 @@ Clase A (Zonotrichia_capensis_sim): notas largas con barrido descendente
 Clase B (Troglodytes_aedon_sim): trino rápido de notas cortas con barrido
     ascendente (~3 -> 6 kHz), muchas notas y pausas cortas.
 """
+import argparse
 import sys
 from pathlib import Path
 
@@ -47,6 +48,8 @@ def canto(rng, notas, f0, f1, dur_nota, pausa, total_s, fs=FS):
 
 
 def main(n_por_clase=3):
+    if n_por_clase < 1:
+        raise ValueError("n_por_clase debe ser al menos 1.")
     rng = np.random.default_rng(SEMILLA)
     for clase, args in {
         "Zonotrichia_capensis_sim": dict(notas=4, f0=4500, f1=3000, dur_nota=0.45, pausa=0.25),
@@ -61,4 +64,10 @@ def main(n_por_clase=3):
 
 
 if __name__ == "__main__":
-    main()
+    parser = argparse.ArgumentParser(description="Genera audios sintéticos de prueba para dos clases de aves.")
+    parser.add_argument(
+        "--n-por-clase", type=int, default=3,
+        help="cantidad de archivos WAV que se generan por clase (por defecto: 3)",
+    )
+    args = parser.parse_args()
+    main(args.n_por_clase)
