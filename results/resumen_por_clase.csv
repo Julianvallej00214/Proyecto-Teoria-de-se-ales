@@ -1,0 +1,3 @@
+clase,n_eventos,dur_evento_media_s,pausa_media_s,eventos_por_s,f_dominante_Hz,centroide_Hz,ancho_banda_Hz
+Troglodytes_aedon_sim,14.0,0.074,0.044,2.8,4878.439,5090.34,1080.828
+Zonotrichia_capensis_sim,4.0,0.356,0.358,0.8,3761.881,4072.379,1048.695

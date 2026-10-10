@@ -1,0 +1,22 @@
+# Entornos y caché
+venv/
+.venv/
+env/
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+.pytest_cache/
+
+# Credenciales
+.env
+*.key
+*.pem
+secrets*
+
+# Datos pesados (solo se versiona una muestra pequeña en data/synthetic)
+data/raw/*
+!data/raw/.gitkeep
+
+# Sistema
+.DS_Store
+Thumbs.db
