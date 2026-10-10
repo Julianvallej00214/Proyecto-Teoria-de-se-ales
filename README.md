@@ -35,6 +35,7 @@ Especies seleccionadas (configurables en `src/config.py`):
 
 - **Grabaciones reales:** [Xeno-canto](https://xeno-canto.org), bajo licencias Creative Commons. `src/descargar_xenocanto.py` las baja y guarda autor, licencia e id en `data/raw/<clase>/metadatos.csv`. Las grabaciones **no se suben a GitHub** (ver `.gitignore`).
 - **Señales simuladas:** `src/generar_sinteticas.py` (fs = 22 050 Hz, 5 s, 3 archivos por clase, semilla fija). Se incluyen en el repositorio por ser pequeñas.
+  - La semilla fija (`SEMILLA = 42`) hace reproducibles las señales generadas. El número de WAV se configura con `--n-por-clase` (debe ser al menos 1); si no se indica, se generan 3 archivos por clase.
   - Clase A (`Zonotrichia_capensis_sim`): 4 notas largas (~0.45 s), barrido descendente 4.5 → 3 kHz.
   - Clase B (`Troglodytes_aedon_sim`): trino de 14 notas cortas (~0.08 s), barrido ascendente 3 → 6 kHz.
 
@@ -46,7 +47,8 @@ Python 3.10+ (probado con 3.13).
 pip install -r requirements.txt
 
 # Opción A: demostración inmediata con señales simuladas
-python src/generar_sinteticas.py
+python src/generar_sinteticas.py                 # 3 archivos por clase
+python src/generar_sinteticas.py --n-por-clase 5 # 5 archivos por clase
 python src/analisis_inicial.py --fuente synthetic
 
 # Opción B: con grabaciones reales (requiere internet)
